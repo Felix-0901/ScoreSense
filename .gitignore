@@ -1,0 +1,22 @@
+.venv/
+data/models/
+__pycache__/
+*.py[cod]
+.DS_Store
+.idea/
+.vscode/
+data/uploads/*
+data/work/*
+data/outputs/*
+!data/uploads/.gitkeep
+!data/work/.gitkeep
+!data/outputs/.gitkeep
+
+# Local secrets and generated preprocessing previews
+.env
+.env.*
+!.env.example
+data/preprocess_demo/
+.pytest_cache/
+.coverage
+htmlcov/

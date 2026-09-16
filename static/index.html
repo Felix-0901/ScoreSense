@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>樂譜辨識與自動標註系統</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/opensheetmusicdisplay@1.9.7/build/opensheetmusicdisplay.min.js"></script>
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <p class="eyebrow">MVP 0.1</p>
+      <h1>樂譜辨識與自動標註系統</h1>
+      <p class="lead">上傳樂譜圖片或 MusicXML，產生 Do Re Mi、簡譜或注音標註。</p>
+    </header>
+
+    <section class="panel">
+      <form id="form">
+        <label class="field">
+          <span>樂譜檔案</span>
+          <input id="file" name="file" type="file" accept="image/*,.xml,.musicxml,.mxl" required />
+        </label>
+
+        <label class="field">
+          <span>標註模式</span>
+          <select id="mode" name="mode">
+            <option value="solfege">Do Re Mi</option>
+            <option value="numbered">1 2 3</option>
+            <option value="zhuyin">注音唱名</option>
+          </select>
+        </label>
+
+        <div class="checks">
+          <label><input type="checkbox" id="preprocess" checked /> 圖片前處理</label>
+          <label><input type="checkbox" id="showAccidental" checked /> 顯示升降記號</label>
+          <label><input type="checkbox" id="showOctave" /> 顯示八度提示</label>
+        </div>
+
+        <button id="submit" type="submit">開始處理</button>
+      </form>
+      <div id="status" class="status">正在檢查環境…</div>
+    </section>
+
+    <section id="result" class="panel hidden">
+      <div class="result-head">
+        <div>
+          <p class="eyebrow">RESULT</p>
+          <h2>標註結果</h2>
+          <p id="summary"></p>
+        </div>
+        <a id="download" class="secondary" href="#" download>下載 MusicXML</a>
+      </div>
+      <div id="score"></div>
+      <details>
+        <summary>音符資料預覽</summary>
+        <pre id="notes"></pre>
+      </details>
+    </section>
+  </main>
+  <script src="/static/app.js"></script>
+</body>
+</html>
