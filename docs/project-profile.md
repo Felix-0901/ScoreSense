@@ -34,4 +34,4 @@
 
 ## 靜態教室增補（2026-09-16）
 
-新增同 repository 的靜態教材交付物 `course/`，使用 v2 講義逐步完成 Python → 影像 → MusicXML → OMR → 專案化 → Web → 實驗報告。既有 Python core 保留；Pages 僅承載教材與練習下載，不承載辨識服務。已有本機 Git，origin 已由使用者指定為 https://github.com/Felix-0901/ScoreSense.git ，使用 main；Pages 實際上線尚未執行。
+新增同 repository 的靜態教材交付物 `course/`，使用 v2 講義逐步完成 Python → 影像 → MusicXML → OMR → 專案化 → Web → 實驗報告。既有 Python core 保留；Pages 僅承載教材與練習下載，不承載辨識服務。已有本機 Git，origin 已由使用者指定為 https://github.com/Felix-0901/ScoreSense.git ，使用 main；靜態教室已上線：https://felix-0901.github.io/ScoreSense/ 。後續 push 到 main 自動部署。

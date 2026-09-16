@@ -24,14 +24,18 @@ python3 -m http.server 18766 --bind 127.0.0.1 --directory course/site
 
 ## GitHub Pages
 
-已準備 `.github/workflows/course-pages.yml`，僅手動觸發，避免日後一般 push 自動發布。origin 已設定為 https://github.com/Felix-0901/ScoreSense.git ，使用 main；GitHub Pages 尚未部署。
+教學網站已上線：[ScoreSense 逐步專題教室](https://felix-0901.github.io/ScoreSense/)。origin 為 https://github.com/Felix-0901/ScoreSense.git ，使用 `main`。
 
-確認教材、素材與參考程式可公開後：
+`.github/workflows/course-pages.yml` 在每次 push 到 `main` 時自動建置並部署，亦保留 `workflow_dispatch` 手動重跑。GitHub Pages 的 Source 使用 **GitHub Actions**。
 
-1. 將已審查的專案內容提交並推送到你選定的 GitHub repository（需另行授權實際操作）。
-2. Repository → Settings → Pages → Build and deployment → Source 選 **GitHub Actions**。
-3. Actions → **Deploy ScoreSense classroom** → Run workflow，選擇欲發布的 branch。
-4. 成功後在部署結果開啟 Pages 網址，核對章節深連結、搜尋和下載。
+日後更新流程：
+
+1. 修改 `course/content/*.md` 教材或 `course/site/` 介面，依本文件建置並預覽。
+2. 檢查變更後 commit，執行 `git push origin main`。
+3. 到 Actions → **Deploy ScoreSense classroom**，確認該次 commit 的 `build` 與 `deploy` 都成功。
+4. 重新整理教學網站，核對更新內容。部署完成前仍會顯示前一版；若失敗，查看失敗步驟的日誌，修正後再推送。
+
+需要手動重跑時，在上述 workflow 點 **Run workflow**，選 `main`。不需另提交編譯後的 JSON、素材副本或 ZIP。
 
 Workflow 安裝教材編譯器，產生並僅上傳 `course/site/`；不發布 Python API、模型、data 或教師資料。採相對資源 URL 與 hash 導覽，同時支援使用者根站與 `/repository/` 專案網址，無需自訂網域或後端。
 

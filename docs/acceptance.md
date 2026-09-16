@@ -37,3 +37,9 @@
 - 本機 `/site/#lesson/24` 子路徑載入、重新整理與素材下載通過，支援 Pages repository 路徑；未實際部署 GitHub。
 - 本次未改 Python runtime 與原辨識介面；未重跑 OMR。未逐一執行教材所有程式，不代表教材跨平台安裝或所有課程成果已驗收。
 - 已同步 README、AGENTS、需求、架構、定位、能力與本機開發文件。初次網站驗收時未提交或發布；後續使用者已授權 main commit 與 push，origin 指定為 https://github.com/Felix-0901/ScoreSense.git 。Pages 實際發布未執行。
+
+## Pages 上線與自動部署（2026-09-16 後續）
+
+使用者已完成 Pages 設定及首次部署。實查 https://felix-0901.github.io/ScoreSense/ 回傳 HTTP 200；GitHub Actions run `35048909512`、commit `7d22ad3` 結果為 success，取代上述初次驗收時的未部署狀態。
+
+依使用者要求，workflow 新增 `push.branches: [main]`，保留 `workflow_dispatch`；README 新增網站入口，教室 README 與架構、開發、定位、能力、協作文件同步自動部署規則。公開範圍仍只有 `course/site/`，辨識 API、模型、使用者資料與教師版不包含在 Pages artifact。此修改的首次自動部署結果以對應 commit 的 Actions 紀錄為準。

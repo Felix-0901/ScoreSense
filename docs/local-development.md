@@ -53,4 +53,4 @@ macOS CPU 路徑，沿用既有專案安裝方式（本次未執行安裝與下�
 
 ## 靜態教室建置
 
-使用獨立 Python 環境安裝 `requirements-course.txt`，執行 `python scripts/build_course.py`，再以 `python3 -m http.server 18766 --bind 127.0.0.1 --directory course/site` 預覽。完整命令與 Pages 手動發布步驟見 [course/README.md](../course/README.md)。教材網站不依賴既有 `.venv`、oemer 或 OSMD CDN。
+使用獨立 Python 環境安裝 `requirements-course.txt`，執行 `python scripts/build_course.py`，再以 `python3 -m http.server 18766 --bind 127.0.0.1 --directory course/site` 預覽。完整命令與 Pages 自動部署與手動重跑步驟見 [course/README.md](../course/README.md)。教材網站不依賴既有 `.venv`、oemer 或 OSMD CDN。

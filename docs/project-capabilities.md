@@ -24,4 +24,4 @@
 
 ## 靜態教材交付責任
 
-`classroom`：required；owner_components：core；責任路徑 `course/`、`scripts/build_course.py`、`requirements-course.txt`、`.github/workflows/course-pages.yml`；權責文件為 `course/README.md`、architecture、requirements、acceptance。維護時重建教材並驗證章節與資源隔離、桌機／手機閱讀；Pages 實際發布需明確授權。原先雲端 not_needed 指辨識 runtime，教材現在有 Pages 部署設定但未上線。
+`classroom`：required；owner_components：core；責任路徑 `course/`、`scripts/build_course.py`、`requirements-course.txt`、`.github/workflows/course-pages.yml`；權責文件為 `course/README.md`、architecture、requirements、acceptance。維護時重建教材並驗證章節與資源隔離、桌機／手機閱讀；使用者已授權 main push 自動部署教室，保留手動重跑。原先雲端 not_needed 指辨識 runtime；靜態教材已於 https://felix-0901.github.io/ScoreSense/ 上線。

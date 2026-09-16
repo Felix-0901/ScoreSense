@@ -56,4 +56,4 @@ Python 套件由 requirements 檔管理，未有完整傳遞依賴鎖檔。oemer
 
 `course/content/` Markdown → `scripts/build_course.py` → `course/site/lessons.json` 與素材／ZIP。`course/site/index.html`、CSS、JavaScript 提供 hash 章節導覽、全文搜尋、章節進度與列印；不呼叫 FastAPI。瀏覽器僅以 localStorage 保存完成章節及最後閱讀章節，無同步或帳號。所有網站資源使用相對 URL，支援 GitHub Pages repository 子路徑。
 
-教師 A 原文放 `course/private/` 並 Git 忽略，不進入公開產物。公開來源 ZIP 包含其他教材與來源參考程式，參考程式是教材快照。Pages workflow 僅手動執行，artifact 限 `course/site/`；本機上傳、模型與工作產物不在 artifact。原本 core 的本機安全邊界維持不變。
+教師 A 原文放 `course/private/` 並 Git 忽略，不進入公開產物。公開來源 ZIP 包含其他教材與來源參考程式，參考程式是教材快照。Pages workflow 每次 push 到 `main` 自動執行，亦保留手動觸發，artifact 限 `course/site/`；本機上傳、模型與工作產物不在 artifact。原本 core 的本機安全邊界維持不變。

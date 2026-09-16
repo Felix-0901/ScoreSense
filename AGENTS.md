@@ -64,7 +64,7 @@ Superpowers 預設停用，僅使用者當前訊息以明確 plugin tag 啟用�
 
 ## Git 與交付
 
-2026-09-16 已確認本機 Git repository、目前 main、origin 指向 https://github.com/Felix-0901/ScoreSense.git。Git 操作仍須符合明確授權，不捏造遠端或發布狀態。
+2026-09-16 已確認本機 Git repository、目前 main、origin 指向 https://github.com/Felix-0901/ScoreSense.git。Git 操作仍須符合明確授權，不捏造遠端或發布狀態。使用者已授權教學網站在 main push 後自動部署；網站入口 https://felix-0901.github.io/ScoreSense/ ，此授權不涵蓋辨識 API 對外部署。
 
 # 個人專案 Git、Commit 與分支規範
 
