@@ -20,3 +20,12 @@ data/preprocess_demo/
 .pytest_cache/
 .coverage
 htmlcov/
+
+# Teacher-only handout and generated classroom output
+course/private/
+course/site/lessons.json
+course/site/materials/
+course/site/downloads/
+output/playwright/
+
+.playwright-cli/

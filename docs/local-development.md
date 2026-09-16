@@ -50,3 +50,7 @@ macOS CPU 路徑，沿用既有專案安裝方式（本次未執行安裝與下�
 `process` 支援 `--mode solfege|numbered|zhuyin`、`--output`、`--no-preprocess`、`--hide-accidental`、`--show-octave`。`preprocess <圖片路徑>` 可單獨產生前處理，預設寫至 `data/preprocess_demo/`。這些其餘選項本次未逐項執行。
 
 目前沒有專案 lint、typecheck、build 或 CI 命令；不要虛構通過。一般修改依風險執行 unittest、CLI、API／瀏覽器或 OMR 驗證；文件修改核對路徑、程式事實與差異即可。
+
+## 靜態教室建置
+
+使用獨立 Python 環境安裝 `requirements-course.txt`，執行 `python scripts/build_course.py`，再以 `python3 -m http.server 18766 --bind 127.0.0.1 --directory course/site` 預覽。完整命令與 Pages 手動發布步驟見 [course/README.md](../course/README.md)。教材網站不依賴既有 `.venv`、oemer 或 OSMD CDN。

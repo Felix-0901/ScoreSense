@@ -31,3 +31,7 @@
 已補 README、AGENTS、能力、需求、驗收、開發與架構文件，補安全忽略規則。保留所有程式、依賴、原始樂譜、既有產物與環境。不建立 Git、CI、Docker、App、雲端服務或 LICENSE。
 
 待決：專案程式授權；模型與樂譜再散布權限；有價值作品的保留／備份期限；日後是否公開服務及其權限／資源限制。這些未決事項僅阻擋對應發布、刪除或架構變更，不阻擋本機教學與文件維護。
+
+## 靜態教室增補（2026-09-16）
+
+新增同 repository 的靜態教材交付物 `course/`，使用 v2 講義逐步完成 Python → 影像 → MusicXML → OMR → 專案化 → Web → 實驗報告。既有 Python core 保留；Pages 僅承載教材與練習下載，不承載辨識服務。已有本機 Git，origin 已由使用者指定為 https://github.com/Felix-0901/ScoreSense.git ，使用 main；Pages 實際上線尚未執行。

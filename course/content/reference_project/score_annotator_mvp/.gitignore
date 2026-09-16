@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.py[cod]
+.DS_Store
+.idea/
+.vscode/
+data/uploads/*
+data/work/*
+data/outputs/*
+!data/uploads/.gitkeep
+!data/work/.gitkeep
+!data/outputs/.gitkeep

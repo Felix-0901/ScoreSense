@@ -16,7 +16,8 @@
 | 前處理／模型介接 | app/services/image_preprocessor.py、omr.py、scripts/download_omr_models.py |
 | 音高／標註 | app/services/converter.py、musicxml.py |
 | 流程與 API | app/services/pipeline.py、app/web.py |
-| 網頁與設計實作來源 | static/ |
+| 網頁與設計實作來源 | static/（辨識介面）；course/site/（靜態教室） |
+| 教材來源／編譯 | course/content/、scripts/build_course.py、requirements-course.txt；course/private/ 不公開 |
 | 驗證 | tests/、samples/；data/ 是使用者或產生資料，非測試真值來源 |
 
 文件權責：`docs/project-profile.md` 管定位與未決事項；`docs/requirements.md` 管需求及課程對照；`docs/project-capabilities.md` 管能力狀態與責任；`docs/architecture.md` 管架構、API、資料、儲存、安全、整合與部署邊界；`docs/local-development.md` 管環境與命令；`docs/acceptance.md` 管證據；README 是入口，AGENTS 是工作契約。修改事實時同一任務同步權責文件，避免複製另一套規格。
@@ -63,7 +64,7 @@ Superpowers 預設停用，僅使用者當前訊息以明確 plugin tag 啟用�
 
 ## Git 與交付
 
-目前不是 Git repository；以下規則在操作具備前提及明確授權後適用。無 Git 時以修改前備份／內容比對檢查差異，不捏造 branch 或 remote。
+2026-09-16 已確認本機 Git repository、目前 main、origin 指向 https://github.com/Felix-0901/ScoreSense.git。Git 操作仍須符合明確授權，不捏造遠端或發布狀態。
 
 # 個人專案 Git、Commit 與分支規範
 

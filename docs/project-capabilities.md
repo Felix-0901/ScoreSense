@@ -21,3 +21,7 @@
 | `docs` 課程與實作同步 | documentation | required | README.md／AGENTS.md／docs/ | [project-profile.md](project-profile.md) | 文件連結與原始碼核對 | 隨功能與驗收同任務同步 | none |
 | `extensions` 首調／PDF／App | product | optional_later | 無實作 owner 路徑 | [requirements.md](requirements.md) | 尚未實作與驗收 | 需求另案確認後指定 owner | user |
 | `release-license` 公開再散布授權 | delivery | unresolved | THIRD_PARTY.md | [project-profile.md](project-profile.md) | 未選專案 LICENSE，未完整授權盤點 | 公開前確認程式、模型與樂譜權利 | user |
+
+## 靜態教材交付責任
+
+`classroom`：required；owner_components：core；責任路徑 `course/`、`scripts/build_course.py`、`requirements-course.txt`、`.github/workflows/course-pages.yml`；權責文件為 `course/README.md`、architecture、requirements、acceptance。維護時重建教材並驗證章節與資源隔離、桌機／手機閱讀；Pages 實際發布需明確授權。原先雲端 not_needed 指辨識 runtime，教材現在有 Pages 部署設定但未上線。

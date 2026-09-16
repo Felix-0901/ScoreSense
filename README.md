@@ -4,6 +4,10 @@
 
 > 狀態：本機原型（prototype）。MusicXML 標註範例與 7 項單元測試已通過；圖片 OMR、瀏覽器排版與跨平台安裝尚未完成本次端到端驗證。不是已部署的公開服務。
 
+## 逐步專題教學網站
+
+已加入 26 堂實作課、課程導讀與補充的靜態教室，支援搜尋、學習進度、程式碼複製與教材下載。原始教材在 `course/content/`，網站在 `course/site/`；建置、預覽與 GitHub Pages 設定見 [教室使用說明](course/README.md)。網站不需要 FastAPI，辨識練習仍在本機執行。
+
 ## 目前功能
 
 - 圖片灰階、對比增強、傾斜估計與校正，以及二值化教學預覽。
@@ -59,4 +63,4 @@ data/                   本機上傳、工作檔、輸出與模型（不提交�
 - [能力與維護責任](docs/project-capabilities.md)：十類能力與驗證責任。
 - [本機開發](docs/local-development.md)、[驗收證據](docs/acceptance.md)。
 
-目前沒有 Git repository／remote，未初始化、提交或發布。專案授權尚未選定；[THIRD_PARTY.md](THIRD_PARTY.md) 是既有第三方元件清單，公開發布前仍需確認套件、模型與示範樂譜的授權。
+Git 分支為 `main`，origin 為 https://github.com/Felix-0901/ScoreSense.git 。GitHub Pages 尚未部署。專案授權尚未選定；[THIRD_PARTY.md](THIRD_PARTY.md) 是既有第三方元件清單，公開發布前仍需確認套件、模型與示範樂譜的授權。

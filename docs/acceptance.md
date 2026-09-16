@@ -27,3 +27,13 @@
 - optional_later：首調、PDF／圖片匯出、多頁、App；新增功能需另有任務範圍。
 
 沒有修改產品行為，因此沒有新增測試來重複既有實作。沒有 commit、push、部署或 Git 初始化。
+
+## 逐步專題教室驗收（2026-09-16）
+
+- `/tmp/scoresense-course-venv/bin/python -m unittest discover -s tests -p test_course_build.py -v`：4/4 通過；31 篇輸出契約、教師資料隔離、HackMD 程式範例保留、ZIP 可重現性。主代理重跑確認。
+- `.venv/bin/python -m unittest discover -s tests -v`：既有 7 項通過；教材測試因核心環境未裝 Markdown 明確略過，已在獨立教材環境驗證。
+- `node --check course/site/app.js`、`git diff --check`：通過。
+- Playwright 實際瀏覽器：首頁與課程桌機／390px 手機畫面已查看；00–26 全章無頁面水平溢出；搜尋、手機目錄與搜尋送出、進度重整保存、程式複製、章內跳轉、三份 ZIP HTTP 200 通過。
+- 本機 `/site/#lesson/24` 子路徑載入、重新整理與素材下載通過，支援 Pages repository 路徑；未實際部署 GitHub。
+- 本次未改 Python runtime 與原辨識介面；未重跑 OMR。未逐一執行教材所有程式，不代表教材跨平台安裝或所有課程成果已驗收。
+- 已同步 README、AGENTS、需求、架構、定位、能力與本機開發文件。初次網站驗收時未提交或發布；後續使用者已授權 main commit 與 push，origin 指定為 https://github.com/Felix-0901/ScoreSense.git 。Pages 實際發布未執行。

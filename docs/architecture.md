@@ -51,3 +51,9 @@ job ID 為 UUID hex 前 12 字元，不是存取權杖。檔案會留在磁碟�
 Python 套件由 requirements 檔管理，未有完整傳遞依賴鎖檔。oemer 為選配本機推論；模型下載來源由 `scripts/download_omr_models.py` 指向 GitHub，並非自行訓練。瀏覽器從 jsDelivr 取得 OSMD 1.9.7；這是網路依賴，未實作離線封裝。沒有已設定的付費 API、資料庫、容器或雲端。
 
 `THIRD_PARTY.md` 是元件清單而非完整授權稽核。公開、再散布或更換模型前需核對實際授權；這次沒有選定專案 LICENSE，也沒有發布／備份／回滾的生產證據。
+
+## 靜態教室（2026-09-16）
+
+`course/content/` Markdown → `scripts/build_course.py` → `course/site/lessons.json` 與素材／ZIP。`course/site/index.html`、CSS、JavaScript 提供 hash 章節導覽、全文搜尋、章節進度與列印；不呼叫 FastAPI。瀏覽器僅以 localStorage 保存完成章節及最後閱讀章節，無同步或帳號。所有網站資源使用相對 URL，支援 GitHub Pages repository 子路徑。
+
+教師 A 原文放 `course/private/` 並 Git 忽略，不進入公開產物。公開來源 ZIP 包含其他教材與來源參考程式，參考程式是教材快照。Pages workflow 僅手動執行，artifact 限 `course/site/`；本機上傳、模型與工作產物不在 artifact。原本 core 的本機安全邊界維持不變。
