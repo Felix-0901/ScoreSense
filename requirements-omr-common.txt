@@ -1,0 +1,10 @@
+# Shared OMR dependencies for Python 3.11; choose a platform runtime separately.
+-r requirements.txt
+matplotlib==3.7.5
+pillow==12.3.0
+scipy==1.10.1
+scikit-learn==1.2.0
+types-Pillow==10.2.0.20240822
+types-tensorflow==2.18.0.20260827
+typing-extensions
+requests==2.34.2

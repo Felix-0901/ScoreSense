@@ -1,5 +1,5 @@
-# Optional: image -> MusicXML recognition.
-# Install after requirements.txt inside a Python 3.11 virtual environment.
-# oemer 0.1.8 is MIT licensed, but older internals rely on NumPy aliases;
-# requirements.txt therefore pins NumPy 1.23.5 for compatibility.
+# Windows Python 3.11 OMR. For macOS use requirements-omr-mac.txt.
+# oemer declares this runtime dependency; CPU execution is available without CUDA.
+-r requirements-omr-common.txt
+onnxruntime-gpu==1.17.1
 oemer==0.1.8

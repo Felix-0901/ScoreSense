@@ -87,7 +87,7 @@ print(10 * 3)
 核心程式在較新的 Python 也可能可以執行，但為了讓 OMR 相容性比較容易控制，本教材統一以 **Python 3.11** 示範。
 
 :::warning
-不要因為電腦已經有某個 Python 就直接使用。專題最怕每個人的版本不同、套件版本也不同，最後同一份程式在不同電腦出現不同錯誤。
+建立環境時明確指定 Python 3.11，避免使用到電腦上其他版本的 Python。
 :::
 
 ### Windows
@@ -111,33 +111,283 @@ python3.11 --version
 
 ---
 
-## 單元三｜建立虛擬環境
+## 單元三｜一步一步建立 Python 專題環境
 
-在 `scoresense_course` 資料夾中執行。
+接下來在自己的電腦上，依序完成：安裝 Python 3.11、建立專案資料夾、建立虛擬環境，再安裝後續課程使用的套件。
 
-### Windows
-
-```powershell
-py -3.11 -m venv .venv
-.\.venv\Scripts\python.exe --version
-```
-
-### macOS / Linux
-
-```bash
-python3.11 -m venv .venv
-./.venv/bin/python --version
-```
-
-`.venv` 就像這份專題自己的工具箱。
+本機 Python 用來建立虛擬環境；專案套件裝在 `.venv`，自己的程式則放在外面：
 
 ```text
 scoresense_course/
-├── .venv/       ← Python 與第三方套件
-└── hello.py      ← 自己寫的程式
+├── .venv/       專案專用的 Python 與套件
+└── hello.py     自己寫的程式
 ```
 
-不要把自己的 `.py` 檔放進 `.venv`。
+依照自己的作業系統，完成下面其中一組操作。
+
+### 3-1｜Windows：安裝本機 Python
+
+開啟 PowerShell，安裝 Python 3.11：
+
+```powershell
+winget install -e --id Python.Python.3.11 --source winget
+```
+
+完成後關閉 PowerShell，再重新開啟，確認版本：
+
+```powershell
+py -3.11 --version
+```
+
+應看到 `Python 3.11.x`。`py -3.11` 明確指定使用 3.11，不會因為電腦同時有其他版本而選錯。
+
+### 3-2｜Windows：建立專案與虛擬環境
+
+先在家目錄的 `projects` 下建立專案資料夾，再進入：
+
+```powershell
+New-Item -ItemType Directory -Force -Path "$HOME\projects\scoresense_course"
+Set-Location "$HOME\projects\scoresense_course"
+Get-Location
+```
+
+`New-Item` 建立資料夾，`Set-Location` 切換位置，`Get-Location` 顯示所在位置。接下來的指令都在 `scoresense_course` 裡執行。
+
+建立虛擬環境：
+
+```powershell
+py -3.11 -m venv .venv
+```
+
+`-m venv` 是執行 Python 內建的虛擬環境工具，最後的 `.venv` 是環境資料夾名稱。
+
+啟用環境：
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+如果 PowerShell 顯示無法執行指令碼，在目前視窗執行：
+
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
+.\.venv\Scripts\Activate.ps1
+```
+
+啟用後，提示字元前方通常會出現 `(.venv)`。確認版本與路徑：
+
+```powershell
+python --version
+python -c "import sys; print(sys.executable)"
+```
+
+應看到 Python 3.11，路徑結尾應為 `scoresense_course\.venv\Scripts\python.exe`。
+
+設定目前視窗的 Python 使用 UTF-8，並更新環境內的 pip：
+
+```powershell
+$env:PYTHONUTF8 = "1"
+python -m pip install --upgrade pip
+```
+
+### 3-3｜Windows：依用途安裝套件
+
+保持虛擬環境啟用，依序執行以下指令。這些套件都會安裝到專案的 `.venv`。
+
+**第一步：影像處理。** NumPy 負責陣列運算，OpenCV 負責讀圖與前處理。
+
+```powershell
+python -m pip install numpy==1.26.4 opencv-python-headless==4.8.1.78
+```
+
+**第二步：網頁服務。** FastAPI 建立 API，Uvicorn 啟動服務，python-multipart 處理檔案上傳。
+
+```powershell
+python -m pip install fastapi==0.128.2 "uvicorn[standard]==0.48.0" python-multipart==0.0.20
+```
+
+**第三步：辨識工具需要的影像與數學套件。**
+
+```powershell
+python -m pip install matplotlib==3.7.5 pillow==12.3.0 scipy==1.10.1 scikit-learn==1.2.0
+```
+
+**第四步：下載工具與型別依賴。** `types-tensorflow` 是型別描述套件，不是 TensorFlow 推論引擎。
+
+```powershell
+python -m pip install requests==2.34.2 types-Pillow==10.2.0.20240822 types-tensorflow==2.18.0.20260827 typing-extensions
+```
+
+**第五步：ONNX Runtime 與 oemer。** ONNX Runtime 執行模型，oemer 負責樂譜辨識流程。
+
+```powershell
+python -m pip install onnxruntime-gpu==1.17.1 oemer==0.1.8
+```
+
+本章先完成套件安裝；模型下載與 ONNX 推論驗證，等後續開始圖片辨識時再操作。
+
+### 3-4｜macOS：安裝本機 Python
+
+開啟「終端機」。先依 [Homebrew 官網](https://brew.sh/)完成 Homebrew 安裝及畫面上的設定步驟，再重新開啟終端機。
+
+安裝 Python 3.11：
+
+```bash
+brew install python@3.11
+```
+
+確認版本：
+
+```bash
+"$(brew --prefix python@3.11)/bin/python3.11" --version
+```
+
+應看到 `Python 3.11.x`。`brew --prefix python@3.11` 會取得 Python 的安裝位置，不必自己猜測路徑。
+
+### 3-5｜macOS：建立專案與虛擬環境
+
+在家目錄的 `projects` 下建立專案資料夾，再進入：
+
+```bash
+mkdir -p ~/projects/scoresense_course
+cd ~/projects/scoresense_course
+pwd
+```
+
+`mkdir -p` 建立資料夾，`cd` 切換位置，`pwd` 顯示目前位置。
+
+使用剛才安裝的 Python 建立虛擬環境：
+
+```bash
+"$(brew --prefix python@3.11)/bin/python3.11" -m venv .venv
+```
+
+啟用環境：
+
+```bash
+source .venv/bin/activate
+```
+
+確認版本與路徑：
+
+```bash
+python --version
+python -c "import sys; print(sys.executable)"
+```
+
+應看到 Python 3.11，路徑結尾應為 `scoresense_course/.venv/bin/python`。
+
+更新環境內的 pip：
+
+```bash
+python -m pip install --upgrade pip
+```
+
+### 3-6｜macOS：依用途安裝套件
+
+保持虛擬環境啟用，依序執行以下指令。
+
+**第一步：影像處理。**
+
+```bash
+python -m pip install numpy==1.26.4 opencv-python-headless==4.8.1.78
+```
+
+**第二步：網頁服務與檔案上傳。**
+
+```bash
+python -m pip install fastapi==0.128.2 "uvicorn[standard]==0.48.0" python-multipart==0.0.20
+```
+
+**第三步：辨識工具需要的影像與數學套件。**
+
+```bash
+python -m pip install matplotlib==3.7.5 pillow==12.3.0 scipy==1.10.1 scikit-learn==1.2.0
+```
+
+**第四步：下載工具與型別依賴。**
+
+```bash
+python -m pip install requests==2.34.2 types-Pillow==10.2.0.20240822 types-tensorflow==2.18.0.20260827 typing-extensions
+```
+
+**第五步：macOS 使用的 ONNX Runtime。**
+
+```bash
+python -m pip install onnxruntime==1.18.1
+```
+
+**第六步：oemer。**
+
+```bash
+python -m pip install --no-deps oemer==0.1.8
+```
+
+`--no-deps` 讓 oemer 使用前面已安裝好的套件，避免它自動要求 macOS 不適用的 `onnxruntime-gpu`。
+
+macOS 的套件安裝到這裡完成。模型下載與 ONNX 推論驗證，等後續開始圖片辨識時再操作。
+
+### 3-7｜設定 VS Code 並執行第一支程式
+
+用 VS Code 的「開啟資料夾」開啟 `scoresense_course`，安裝 Microsoft 的 Python 擴充套件。
+
+開啟命令選擇區：
+
+- Windows：`Ctrl+Shift+P`。
+- macOS：`Command+Shift+P`。
+
+搜尋 `Python: Select Interpreter`，選取這個專案的 `.venv`。這樣 VS Code 才會使用剛才安裝套件的 Python。
+
+在專案根目錄建立單元一的 `hello.py`：
+
+```python
+print("Hello, ScoreSense!")
+print(3 + 5)
+```
+
+在已啟用虛擬環境的終端機執行：
+
+```bash
+python hello.py
+```
+
+應看到：
+
+```text
+Hello, ScoreSense!
+8
+```
+
+### 3-8｜下次開啟專案時
+
+Python、虛擬環境與套件只需要安裝一次。下次開啟終端機，只要進入資料夾、啟用環境，再執行程式。
+
+Windows：
+
+```powershell
+Set-Location "$HOME\projects\scoresense_course"
+.\.venv\Scripts\Activate.ps1
+$env:PYTHONUTF8 = "1"
+python hello.py
+```
+
+macOS：
+
+```bash
+cd ~/projects/scoresense_course
+source .venv/bin/activate
+python hello.py
+```
+
+結束工作時可輸入 `deactivate`，離開目前終端機的虛擬環境。
+
+### 本單元檢查
+
+- 電腦已安裝 Python 3.11。
+- 已建立 `scoresense_course`，並在裡面建立 `.venv`。
+- 終端機與 VS Code 都使用專案的 `.venv`。
+- 已依序完成自己作業系統的套件安裝步驟。
+- 可以執行 `hello.py`，看到預期輸出。
 
 ---
 
@@ -154,7 +404,7 @@ import cv2
 關係是：
 
 ```text
-pip install opencv-python
+python -m pip install opencv-python-headless
         ↓
 套件被安裝進虛擬環境
         ↓
@@ -163,31 +413,11 @@ import cv2
 程式開始使用它
 ```
 
-先建立 `requirements.txt`：
+單元三已經用 `python -m pip install` 安裝套件，這裡不用重裝。`pip` 負責把套件裝到環境裡，`import` 則是讓目前的程式載入它。
 
-```text
-numpy==1.23.5
-opencv-python-headless==4.8.1.78
-fastapi==0.128.2
-uvicorn[standard]==0.48.0
-python-multipart==0.0.20
-```
+例如安裝時使用 `opencv-python-headless`，程式內卻寫 `import cv2`，因為安裝名稱與匯入名稱不一定相同。
 
-安裝：
-
-Windows：
-
-```powershell
-.\.venv\Scripts\python.exe -m pip install -r requirements.txt
-```
-
-macOS / Linux：
-
-```bash
-./.venv/bin/python -m pip install -r requirements.txt
-```
-
-現在先不用理解 FastAPI。它只是後面會用到，所以先固定版本。
+若套件明明裝過卻無法匯入，先用單元五的方法確認執行程式的 Python 是否來自同一個 `.venv`。
 
 ---
 
@@ -309,7 +539,6 @@ for index, note in enumerate(notes, start=1):
 ```text
 scoresense_course/
 ├── .venv/
-├── requirements.txt
 ├── check_env.py
 ├── hello.py
 └── lesson01_notes.py

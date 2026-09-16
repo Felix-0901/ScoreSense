@@ -1,47 +1,64 @@
 # 本機開發
 
-## 現有環境與已驗證命令
+## Python 3.11 與平台套件清單
 
-在根目錄執行。2026-09-16 已確認 macOS arm64、Python 3.11.14、OpenCV 4.8.1、FastAPI 0.128.2、Uvicorn 0.48.0、multipart 0.0.20。
+完整的新手步驟見 [第 1 章單元三](../course/content/01_環境安裝與第一支Python程式.md)：先安裝本機 Python，再進入專案根目錄建立 `.venv`，再安裝平台套件；模型準備留待辨識章節。不要在全域 Python 安裝專案依賴。
 
-```bash
-.venv/bin/python doctor.py
-.venv/bin/python -m unittest discover -s tests -v
-.venv/bin/python main.py process samples/twinkle.musicxml --mode zhuyin
+Windows PowerShell：
+
+```powershell
+py -3.11 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+$env:PYTHONUTF8 = "1"
+python -m pip install --upgrade pip
+python -m pip install -r requirements-omr.txt
 ```
 
-本次 7 個測試通過；範例輸出 7 個音符。doctor 只檢查部分 imports 與 oemer 命令位置，退出成功不代表 OMR 模型已驗證。
+每次新開終端機，重新啟用環境並設定 UTF-8；不必重裝套件。
 
-## 網頁啟動（程式存在，HTTP 本次未驗證）
-
-```bash
-.venv/bin/python main.py web
-```
-
-預設 `127.0.0.1:8000`，可用 `--port` 調整。本次於 18764 測試時遭執行環境拒絕 bind：`operation not permitted`。可在一般本機終端啟動後讀取 `/api/health`，上傳 `samples/twinkle.musicxml` 核對三種模式、顯示與下載。`run_mac_linux.sh` 使用 `.venv/bin/python`；`run_windows.bat` 使用 PATH 的 `python`，先啟用對應環境。Windows／Linux 未驗證。
-
-## 新環境安裝（沿用原文件，未重新安裝驗證）
+macOS（已安裝 Python 3.11）：
 
 ```bash
 python3.11 -m venv .venv
 source .venv/bin/activate
-python -m pip install -r requirements.txt
+python -m pip install --upgrade pip
+python -m pip install -r requirements-omr-mac.txt
+python -m pip install --no-deps oemer==0.1.8
 ```
 
-Windows 啟用方式為 `.venv\Scripts\activate`。不要覆蓋已有虛擬環境或自行升級依賴；requirements 固定直接依賴版本，但不保證完整可重現。
+若 Homebrew 的 Python 不在 PATH，以 `"$(brew --prefix python@3.11)/bin/python3.11"` 建立環境。
 
-### 選配 OMR
+| 清單 | 用途 |
+| --- | --- |
+| requirements.txt | 核心 API 與 OpenCV，NumPy 1.26.4 |
+| requirements-omr-common.txt | 引入核心清單，固定共同 OMR 依賴並包含 requests |
+| requirements-omr.txt | Windows oemer 0.1.8、ONNX Runtime GPU 1.17.1 |
+| requirements-omr-mac.txt | 引入共同清單，使用 ONNX Runtime CPU 1.18.1 |
+| requirements-course.txt | 獨立教材建置依賴，非辨識 runtime 必需 |
 
-macOS CPU 路徑，沿用既有專案安裝方式（本次未執行安裝與下載）：
+直接依賴已固定主要相容版本，但沒有完整傳遞依賴鎖檔。
+
+Mac 用 CPU runtime 替代 oemer 宣告的 GPU runtime，因此 `pip check` 仍可能回報 oemer 缺少 onnxruntime-gpu。這是上游 metadata 限制，並非可藉升降 NumPy 消除的衝突；不能在 Mac 安裝 CUDA 套件，也不要混裝兩個 runtime。其他依賴錯誤仍須處理。
+
+## 模型、啟動與驗證
+
+環境啟用後兩平台使用相同命令：
 
 ```bash
-.venv/bin/python -m pip install -r requirements-omr-mac.txt
-.venv/bin/python -m pip install --no-deps oemer==0.1.8
-.venv/bin/python scripts/download_omr_models.py
-.venv/bin/python doctor.py
+python scripts/download_omr_models.py
+python doctor.py
+python -m pip check
+python main.py process samples/twinkle.musicxml --mode zhuyin
+python main.py web --host 127.0.0.1 --port 8000
 ```
 
-既有文件記載 oemer metadata 要求 `onnxruntime-gpu`，Mac 以 CPU `onnxruntime` 替代，因此 `pip check` 可能仍報缺 GPU 套件；不要因此在 Mac 安裝 GPU 路徑。其他相容 GPU 環境使用 `requirements-omr.txt`，本次未驗證。模型下載會存取 GitHub、寫入本機快取與套件 checkpoints；先確認環境與網路再自行執行。
+模型腳本使用 GitHub，沿用 `data/models/` 快取，並複製至目前虛擬環境的 oemer checkpoints。兩個模型都必須載入成功。網頁入口為 `http://127.0.0.1:8000/`，按 Ctrl+C 停止。
+
+`doctor.py` 和 `/api/health` 只檢查命令存在，不代表模型推論已通過。教材第 1 章僅準備環境，模型與真實圖片驗證留待後續辨識章節。
+
+Windows 安裝清單通過依賴檢查；macOS ARM64／x86_64 通過套件解析與 wheel 可用性檢查，尚未在 Mac 實機驗證。
+
+原始 Windows 測試仍有一項 `test_finds_environment_command_without_activated_path` 因測試建立無 .exe 的假命令而失敗；實際 oemer.exe 查找正常。本次未更動應用程式與測試。
 
 ## 設定與 CLI
 
