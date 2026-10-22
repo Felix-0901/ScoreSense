@@ -33,7 +33,7 @@ SITE_DIR = ROOT / "course" / "site"
 LESSONS_JSON = SITE_DIR / "lessons.json"
 
 ADMONITION_RE = re.compile(r"^:::(info|warning|tip)\s*$", re.MULTILINE)
-PUBLIC_IDS = tuple(f"{number:02d}" for number in range(27)) + ("B", "C", "D", "readme")
+PUBLIC_IDS = tuple(f"{number:02d}" for number in range(28)) + ("B", "C", "D", "readme")
 
 
 @dataclass(frozen=True)
