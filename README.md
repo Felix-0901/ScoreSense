@@ -8,7 +8,7 @@
 
 **[開啟 ScoreSense 逐步專題教室](https://felix-0901.github.io/ScoreSense/)**
 
-已加入 26 堂實作課、課程導讀與補充的靜態教室，支援搜尋、學習進度、程式碼複製與教材下載。原始教材在 `course/content/`，網站在 `course/site/`；建置、預覽與 GitHub Pages 設定見 [教室使用說明](course/README.md)。網站不需要 FastAPI，辨識練習仍在本機執行。
+已加入 26 堂專題實作課與第 27 章 Git／GitHub 延伸課、課程導讀與補充的靜態教室，支援搜尋、學習進度、程式碼複製與教材下載。原始教材在 `course/content/`，網站在 `course/site/`；建置、預覽與 GitHub Pages 設定見 [教室使用說明](course/README.md)。網站不需要 FastAPI，辨識練習仍在本機執行。
 
 ## 目前功能
 
